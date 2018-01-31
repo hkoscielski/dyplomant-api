@@ -23,7 +23,7 @@ if($num>0) {
  
     // form of studies array
     $declaration_status_arr=array();
-    $declaration_status_arr["records"]=array();
+    $declaration_status_arr["declaration_statuses"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -39,7 +39,7 @@ if($num>0) {
             "status_name" => $status_name            
         );
  
-        array_push($declaration_status_arr["records"], $declaration_status_item);
+        array_push($declaration_status_arr["declaration_statuses"], $declaration_status_item);
     }
  
     echo json_encode($declaration_status_arr);

@@ -37,5 +37,37 @@ class Supervisor {
         $stmt->execute();
      
         return $stmt;
-    }    
+    } 
+
+    function readOne(){
+	 
+	    // query to read single record
+	    $query = "SELECT
+	              	id_supervisor, 
+                    academic_title, 
+                    name, 
+                    surname,
+                    id_department                    
+                  FROM " . $this->table_name . 
+                  " WHERE id_supervisor = ?
+                   LIMIT 0,1";              
+	 
+	    // prepare query statement
+	    $stmt = $this->conn->prepare( $query );
+	 
+	    // bind id of product to be updated
+	    $stmt->bindParam(1, $this->id_supervisor);
+	 
+	    // execute query
+	    $stmt->execute();
+	 
+	    // get retrieved row
+	    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+	 
+	    // set values to object properties	    
+	    $this->academic_title = $row['academic_title'];
+	    $this->name = $row['name'];
+	    $this->surname = $row['surname'];
+	    $this->id_department = $row['id_department'];
+	}   
 }

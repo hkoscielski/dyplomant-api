@@ -23,7 +23,7 @@ if($num>0) {
  
     // department array
     $department_arr=array();
-    $department_arr["records"]=array();
+    $department_arr["departments"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -39,7 +39,7 @@ if($num>0) {
             "department_name" => $department_name            
         );
  
-        array_push($department_arr["records"], $department_item);
+        array_push($department_arr["departments"], $department_item);
     }
  
     echo json_encode($department_arr);

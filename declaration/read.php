@@ -23,7 +23,7 @@ if($num>0) {
  
     // declarations array
     $declarations_arr=array();
-    $declarations_arr["records"]=array();
+    $declarations_arr["declarations"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -46,7 +46,7 @@ if($num>0) {
             "id_declaration_status" => $id_declaration_status
         );
  
-        array_push($declarations_arr["records"], $declaration_item);
+        array_push($declarations_arr["declarations"], $declaration_item);
     }
  
     echo json_encode($declarations_arr);

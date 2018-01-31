@@ -23,7 +23,7 @@ if($num>0) {
  
     // supervisors array
     $supervisor_arr=array();
-    $supervisor_arr["records"]=array();
+    $supervisor_arr["supervisors"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -42,7 +42,7 @@ if($num>0) {
             "id_department" => $id_department           
         );
  
-        array_push($supervisor_arr["records"], $supervisor_item);
+        array_push($supervisor_arr["supervisors"], $supervisor_item);
     }
  
     echo json_encode($supervisor_arr);

@@ -23,7 +23,7 @@ if($num>0) {
  
     // subject status array
     $subject_status_arr=array();
-    $subject_status_arr["records"]=array();
+    $subject_status_arr["subject_statuses"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -39,7 +39,7 @@ if($num>0) {
             "status_name" => $status_name            
         );
  
-        array_push($subject_status_arr["records"], $subject_status_item);
+        array_push($subject_status_arr["subject_statuses"], $subject_status_item);
     }
  
     echo json_encode($subject_status_arr);

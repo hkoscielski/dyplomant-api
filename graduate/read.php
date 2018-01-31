@@ -23,7 +23,7 @@ if($num>0) {
  
     // graduates array
     $graduates_arr=array();
-    $graduates_arr["records"]=array();
+    $graduates_arr["graduates"]=array();
  
     // retrieve our table contents
     // fetch() is faster than fetchAll()
@@ -45,7 +45,7 @@ if($num>0) {
             "year_of_studies" => $year_of_studies            
         );
  
-        array_push($graduates_arr["records"], $graduate_item);
+        array_push($graduates_arr["graduates"], $graduate_item);
     }
  
     echo json_encode($graduates_arr);

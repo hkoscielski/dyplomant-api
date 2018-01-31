@@ -51,9 +51,8 @@ class Declaration {
     function create() {
      
         // query to insert record
-        $query = "INSERT INTO " . $this->table_name . "
-                  SET
-                      id_declaration=:id_declaration, 
+        $query = "INSERT INTO " . $this->table_name .
+                  " SET id_declaration=:id_declaration, 
                       id_subject=:id_subject, 
                       id_graduate=:id_graduate, 
                       language=:language, 

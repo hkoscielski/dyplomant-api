@@ -1,5 +1,5 @@
 <?php
-class Subject {
+class SubjectJoined {
  
     // database connection and table name
     private $conn;
@@ -8,11 +8,15 @@ class Subject {
     // object properties    
     public $id_subject;
     public $id_supervisor;
+    public $academic_title;
+    public $name;
+    public $surname;       
     public $subject_pl;
     public $subject_en;
     public $taken_up;
     public $graduates_limit;
-    public $id_subject_status;    
+    public $id_subject_status;   
+    public $status_name; 
  
     // constructor with $db as database connection
     public function __construct($db) {
@@ -24,15 +28,21 @@ class Subject {
      
         // select all query
         $query = "SELECT
-                    id_subject, 
-                    id_supervisor, 
-                    subject_pl,
-                    subject_en,
-                    taken_up,
-                    graduates_limit,
-                    id_subject_status
-                  FROM " . $this->table_name . 
-                  " ORDER BY id_subject";
+                    S.id_subject, 
+                    S.id_supervisor, 
+                    SV.id_supervisor,
+                    SV.academic_title,
+                    SV.name,
+                    SV.surname,
+                    S.subject_pl,
+                    S.subject_en,
+                    S.taken_up,
+                    S.graduates_limit,
+                    S.id_subject_status,
+                    SS.id_subject_status,
+                    SS.status_name
+                  FROM " . $this->table_name . " S JOIN supervisors SV ON S.id_supervisor = SV.id_supervisor JOIN subject_statuses SS ON S.id_subject_status = SS.id_subject_status 
+                  ORDER BY id_subject";
      
         // prepare query statement
         $stmt = $this->conn->prepare($query);
@@ -42,42 +52,6 @@ class Subject {
      
         return $stmt;
     }    
-
-    function readOne(){
-     
-        // query to read single record
-        $query = "SELECT
-                    id_subject, 
-                    id_supervisor, 
-                    subject_pl,
-                    subject_en,
-                    taken_up,
-                    graduates_limit,
-                    id_subject_status               
-                  FROM " . $this->table_name . 
-                  " WHERE id_subject = ?
-                   LIMIT 0,1";              
-     
-        // prepare query statement
-        $stmt = $this->conn->prepare( $query );
-     
-        // bind id of subject to be updated
-        $stmt->bindParam(1, $this->id_subject);
-     
-        // execute query
-        $stmt->execute();
-     
-        // get retrieved row
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-     
-        // set values to object properties      
-        $this->id_supervisor = $row['id_supervisor'];
-        $this->subject_pl = $row['subject_pl'];
-        $this->subject_en = $row['subject_en'];
-        $this->taken_up = $row['taken_up'];
-        $this->graduates_limit = $row['graduates_limit'];
-        $this->id_subject_status = $row['id_subject_status'];
-    }   
 
     // update subject
     function update() {
