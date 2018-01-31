@@ -21,27 +21,19 @@ $subject = new Subject($db);
 $data = json_decode(file_get_contents("php://input"));
  
 // set ID property of subjects to be edited
-$subjects->id_subjects = $data->id_subject;
+$subject->id_subject = $data->id_subject;
  
 // set subject property values
-$subject->id_supervisor = $data->id_supervisor;
-$declaration->subject_pl = $data->subject_pl;
-$declaration->subject_en = $data->subject_en;
-$declaration->taken_up = $data->taken_up;
-$declaration->graduates_limit = $data->graduates_limit;
-$declaration->id_subject_status = $data->id_subject_status;
+$subject->taken_up = $data->taken_up;
+$subject->id_subject_status = $data->id_subject_status;
  
 // update the subject
 if($subject->update()){
-    echo '{';
-        echo '"message": "Subject was updated."';
-    echo '}';
+    print_r(json_encode(array("success" => "true", "message" => "Subject was updated")));
 }
  
 // if unable to update the subject, tell the user
 else{
-    echo '{';
-        echo '"message": "Unable to update subject."';
-    echo '}';
+    print_r(json_encode(array("success" => "false", "message" => "Subject was not updated")));
 }
 ?>

@@ -57,10 +57,12 @@ class Graduate {
         $stmt = $this->conn->prepare($query);
      
         // sanitize
+        $this->id_graduate=htmlspecialchars(strip_tags($this->id_graduate)); 
         $this->id_subject=htmlspecialchars(strip_tags($this->id_subject));        
      
         // bind new values        
-        $stmt->bindParam(":id_subject", $this->id_subject);        
+        $stmt->bindParam(":id_subject", $this->id_subject);    
+        $stmt->bindParam(":id_graduate", $this->id_graduate);        
      
         // execute the query
         if($stmt->execute()) {

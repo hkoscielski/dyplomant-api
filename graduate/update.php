@@ -28,15 +28,11 @@ $graduate->id_subject = $data->id_subject;
  
 // update graduate
 if($graduate->update()){
-    echo '{';
-        echo '"message": "Graduate was updated."';
-    echo '}';
+    print_r(json_encode(array("success" => "true", "message" => "Graduate was updated")));
 }
  
 // if unable to update graduate, tell the user
 else{
-    echo '{';
-        echo '"message": "Unable to update graduate."';
-    echo '}';
+    print_r(json_encode(array("success" => "false", "message" => "Graduate was not updated")));
 }
 ?>
