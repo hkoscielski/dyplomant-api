@@ -1,14 +1,12 @@
 <?php
-class Database{
- 
-    // specify your own database credentials
+class Database { 
+    
     private $host = "localhost";
     private $db_name = "dyplomant_db";
     private $username = "root";
     private $password = "";
     public $conn;
- 
-    // get the database connection
+     
     public function getConnection(){
  
         $this->conn = null;
