@@ -32,4 +32,30 @@ class FormOfStudies {
      
         return $stmt;
     }   
+
+    function readOne(){
+     
+        // query to read single record
+        $query = "SELECT
+                    id_form, 
+                    form_name                           
+                  FROM " . $this->table_name . 
+                  " WHERE id_form = ?
+                   LIMIT 0,1";              
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind name of form of studies to be updated
+        $stmt->bindParam(1, $this->id_form);
+     
+        // execute query
+        $stmt->execute();
+     
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        // set values to object properties      
+        $this->form_name = $row['form_name'];        
+    }   
 }

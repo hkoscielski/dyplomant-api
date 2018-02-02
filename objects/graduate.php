@@ -109,4 +109,58 @@ class Graduate {
 	    $this->id_form = $row['id_form'];
 	    $this->year_of_studies = $row['year_of_studies'];
 	}   
+
+    function readUser(){
+     
+        // query to read single record
+        $query = "SELECT
+                    id_graduate, 
+                    id_subject, 
+                    name, 
+                    surname,
+                    student_no,
+                    speciality,
+                    id_form,
+                    year_of_studies                      
+                  FROM " . $this->table_name . 
+                  " WHERE student_no = ?
+                   LIMIT 0,1";              
+     
+        // prepare query statement
+        $stmt = $this->conn->prepare( $query );
+     
+        // bind number of graduate to be updated
+        $stmt->bindParam(1, $this->student_no);
+     
+        // execute query
+        $stmt->execute();
+     
+        // get retrieved row
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+     
+        // set values to object properties  
+        $this->id_graduate = $row['id_graduate'];    
+        $this->id_subject = $row['id_subject'];
+        $this->name = $row['name'];
+        $this->surname = $row['surname'];        
+        $this->speciality = $row['speciality'];
+        $this->id_form = $row['id_form'];
+        $this->year_of_studies = $row['year_of_studies'];
+    }   
+
+    function count($student_no) {
+
+        $query = "SELECT COUNT(*) AS C
+                    FROM " . $this->table_name . 
+                    " WHERE student_no = ?";
+
+        $stmt = $this->conn->prepare( $query );
+        $stmt->bindParam(1, $student_no);
+
+        $stmt->execute();
+
+        $num = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        return $num['C'];
+    }
 }
